@@ -6,7 +6,7 @@ class Calendar(models.Model):
     date = models.DateField(blank=False)    # 캘린더 날짜 -> api 통신하면서 알아보기
     title = models.CharField(max_length=25, null=True)  
     text = models.CharField(max_length=255, null=True)
-    file = models.CharField(max_length=255, null=True)
+    image = models.CharField(max_length=255, null=True)
 
     class Meta:
         db_table = 'calendars'
