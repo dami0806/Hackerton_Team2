@@ -9,6 +9,7 @@ const MainWrap = styled.div`
   display: flex;
   .react-calendar {
     width: 70rem;
+    box-shadow: 0px 0px 10px #000;
   }
 `;
 
