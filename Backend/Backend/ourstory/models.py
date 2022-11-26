@@ -1,9 +1,11 @@
 from django.db import models
+from datetime import date
 
 class Calendar(models.Model):
     id = models.AutoField(primary_key=True) # 자동으로 올라감
     # user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
-    date = models.DateField(blank=False)    # 캘린더 날짜 -> api 통신하면서 알아보기
+    start_date = models.DateField(blank=False, default=date.today)
+    end_date = models.DateField(blank=False, default=date.today)
     title = models.CharField(max_length=25, null=True)  
     text = models.CharField(max_length=255, null=True)
     image = models.CharField(max_length=255, null=True)
