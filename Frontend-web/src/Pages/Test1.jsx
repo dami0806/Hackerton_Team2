@@ -116,7 +116,7 @@ const Btn = styled.button`
   margin-right: 1rem;
 `;
 
-function Story() {
+function Test1() {
   const [fileImage, setFileImage] = useState('');
   const [fileIma, setFileIma] = useState('');
   const [visible, setVisible] = useState(false);
@@ -176,4 +176,4 @@ function Story() {
   );
 }
 
-export default Story;
+export default Test1;
