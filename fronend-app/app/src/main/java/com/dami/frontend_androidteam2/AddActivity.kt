@@ -13,6 +13,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.dami.frontend_androidteam2.databinding.ActivityAddBinding
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
@@ -24,6 +27,7 @@ class AddActivity : AppCompatActivity() {
     private var isImageUpload = false
     val list_item = mutableListOf<String>()
     lateinit var dateKey:String
+    var itemkey:String?=null
     private lateinit var listAdapter: listAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,18 +38,15 @@ class AddActivity : AppCompatActivity() {
         val listview:ListView
 
         dateKey = intent.getStringExtra("dateKey").toString()
-        Log.d("확인",dateKey)
+
         binding.MonthArea.setText(dateKey)
         binding.timeArea.setText( getTime())
-                // 두번째 방법
-                val key = intent.getStringExtra("key")
-                //getBoardData(key.toString())
-                //getImageData(key.toString())
+        key(dateKey)
 
         binding.imageArea.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, 100)
-            isImageUpload = true
+
         }
 
         binding.btnSend.setOnClickListener {
@@ -54,36 +55,59 @@ class AddActivity : AppCompatActivity() {
             val content = binding.contentArea.text.toString()
             val time = getTime()
 
-            // 파이어베이스 store에 이미지를 저장하고 싶습니다
-            // 만약에 내가 게시글을 클릭했을 때, 게시글에 대한 정보를 받아와야 하는데
-            // 이미지 이름에 대한 정보를 모르기 때문에
-            // 이미지 이름을 문서의 key값으로 해줘서 이미지에 대한 정보를 찾기 쉽게 해놓음.
 
-            val key =  FBRef.boardRef
-                .child(dateKey).key.toString()
 
             FBRef.boardRef
                 .child(dateKey)
                 .push()
                 .setValue(AddModel(title, content, time))
 
-            Toast.makeText(this, "오늘의 일기 입력 완료!!", Toast.LENGTH_LONG).show()
 
-            if(isImageUpload == true) {
-                imageUpload(key)
-            }
-            finish()
+            Log.d("이이입려려력", title.toString())
+
+            Toast.makeText(this, "오늘의 일기 입력 완료!!", Toast.LENGTH_LONG).show()
+                imageUpload( title.toString())
+
+          finish()
         }
             }
 
+
+fun key(date:String){
+
+    val postListener = object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+            for (dataModel in dataSnapshot.children) {
+                if (date == dataSnapshot.key.toString()){
+
+                    itemkey = dataModel.getValue(AddModel::class.java).toString()
+
+
+
+                }
+
+            }
+        }
+
+        override fun onCancelled(databaseError: DatabaseError) {
+        }
+
+    }
+    FBRef.boardRef
+        .child(date)
+        .addValueEventListener(postListener)
+
+
+}
     fun getTime() : String {
 
         val currentDateTime = Calendar.getInstance().time
         val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss", Locale.KOREA).format(currentDateTime)
-
         return dateFormat
 
     }
+
     private fun imageUpload(key : String){
         // Get the data from an ImageView as bytes
 
@@ -91,6 +115,7 @@ class AddActivity : AppCompatActivity() {
         val storageRef = storage.reference
         val mountainsRef = storageRef.child(key + ".png")
 
+// Get the data from an ImageView as bytes
         val imageView = binding.imageArea
         imageView.isDrawingCacheEnabled = true
         imageView.buildDrawingCache()
@@ -101,9 +126,10 @@ class AddActivity : AppCompatActivity() {
 
         var uploadTask = mountainsRef.putBytes(data)
         uploadTask.addOnFailureListener {
-
+            // Handle unsuccessful uploads
         }.addOnSuccessListener { taskSnapshot ->
-
+            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+            // ...
         }
 
     }

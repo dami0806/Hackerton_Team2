@@ -12,7 +12,7 @@
 
     <!--text view for displaying the selected date-->
     <TextView
-
+        android:fontFamily="@font/bm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -21,12 +21,13 @@
 
         android:gravity="center"
         android:padding="8dp"
-        android:text="커플앱"
+        android:text="OurStory"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
     <TextView
+        android:fontFamily="@font/bm"
         android:id="@+id/idTVDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,11 +47,13 @@
         android:layout_height="600dp"
         >
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
             <!-- Add CalendarView to display the Calendar -->
             <CalendarView
+                android:fontFamily="@font/bm"
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,6 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="600dp">
                     <ListView
+                        android:fontFamily="@font/bm"
                         android:id="@+id/listView"
                         android:layout_width="match_parent"
                         android:layout_height="600dp"

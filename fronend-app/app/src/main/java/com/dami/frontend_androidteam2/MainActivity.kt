@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     var infoTitle: String="" //넘길 키
     var infoContent: String="" //넘길 키
     var infoTime: String="" //넘길 키
+    var imgkey: String="" //넘길 키
+
     var titleText:String =""
     var timeText:String =""
     private lateinit var listAdapter: listAdapter
@@ -54,21 +56,24 @@ class MainActivity : AppCompatActivity() {
             dateKey = intent.putExtra("dateKey", Datetext).toString()
             startActivity(intent)
 
+
+
+            imgkey =  intent.getStringExtra("imgKey").toString()
+            Log.d("이건",imgkey)
+
         }
-
-
 
         calendarView = findViewById(R.id.calendarView)
         addimg = findViewById(R.id.addimg)
         dateTV = findViewById(R.id.idTVDate)
         calendarView.setOnDateChangeListener(
             CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
-                Datetext =
-                    (year.toString() + "년 " + (month + 1).toString() + "월 " + dayOfMonth.toString() + "일")
+                Datetext =(year.toString() + "년 " + (month + 1).toString() + "월 " + dayOfMonth.toString() + "일")
                 Log.d("확인", Datetext)
                 dateTV.setText(Datetext)
                 //getData(dateTV.toString())
                 getCommentData(Datetext)
+
             })
 
         addimg.setOnClickListener {

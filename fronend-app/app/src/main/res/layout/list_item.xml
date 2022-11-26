@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:fontFamily="@font/bm"
         android:paddingLeft="30dp"
         android:id="@+id/titleArea"
         android:text="title"
@@ -19,6 +20,7 @@
 
 
     <TextView
+        android:fontFamily="@font/bm"
         android:id="@+id/timeArea"
         android:text="time"
         android:textSize="10sp"
