@@ -41,7 +41,8 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="600dp"
@@ -50,7 +51,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
             <!-- Add CalendarView to display the Calendar -->
             <CalendarView
                 android:fontFamily="@font/bm"
