@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "734376583155",
+    "project_id": "hacker-6c112",
+    "storage_bucket": "hacker-6c112.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734376583155:android:eef96257efd272cd73fc86",
+        "android_client_info": {
+          "package_name": "com.dami.frontend_androidteam2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734376583155-9t5ojf7i32pltbcl35tmrhhdrtki0qsk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0hgQPt7Ls2MTj9ED1Jspyf0JEto-mjjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734376583155-9t5ojf7i32pltbcl35tmrhhdrtki0qsk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
