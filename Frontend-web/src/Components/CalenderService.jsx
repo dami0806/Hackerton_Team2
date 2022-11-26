@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import '../App.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import Toolbar from './Toolbar';
 import ListItem from '../Components/ListItem';
+import ListItem2 from '../Components/ListItem2';
 
 const events = [
   {
@@ -24,9 +25,11 @@ const MainWrap = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+  font-family: 'Cute Font', serif;
   .rbc-calendar {
     width: 50rem;
     box-shadow: 0px 0px 10px #000;
+    font-size: 20px;
   }
   .rbc-event {
     background-color: pink;
@@ -59,14 +62,13 @@ const ListTitle = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: bold;
 `;
 
 const List = styled.ul`
   width: 20rem;
   height: 300px;
-  border: 1px solid black;
   overflow: auto;
   list-style: none;
 `;
@@ -101,7 +103,7 @@ const SubTitle = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  font-size: 20px;
+  font-size: 30px;
   margin: 0 6rem;
 `;
 
@@ -133,8 +135,9 @@ const WriteWrap = styled.textarea`
   border: 1px solid black;
   width: 20rem;
   height: 25rem;
-  font-size: 20px;
+  font-size: 50px;
   white-space: pre-wrap;
+  font-family: 'Cute Font', serif;
 `;
 
 const BtnWrap = styled.div`
@@ -177,6 +180,8 @@ const AddBtn = styled.button`
   border-radius: 10rem;
   border: none;
   margin-right: 1rem;
+  font-family: 'Cute Font', serif;
+  font-size: 15px;
 `;
 
 function CalenderService() {
@@ -201,7 +206,6 @@ function CalenderService() {
     const Image = URL.createObjectURL(file);
     setFileIma(Image);
     setFileImage(file);
-    setVisible(true);
   };
 
   const postData = async (e) => {
@@ -217,6 +221,10 @@ function CalenderService() {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const visibleSelect = () => {
+    setVisible(true);
   };
 
   function handleAddEvent() {
@@ -257,6 +265,7 @@ function CalenderService() {
             <ListTitle>OurStory</ListTitle>
             <List>
               <ListItem />
+              {visible && <ListItem2 />}
             </List>
           </ListWrap>
         </CenterWrap>
@@ -285,8 +294,8 @@ function CalenderService() {
           <AddBtn
             onClick={() => {
               handleAddEvent();
+              visibleSelect();
             }}
-            onChange={postData()}
           >
             스토리 추가
           </AddBtn>

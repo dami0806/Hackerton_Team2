@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../Components/Header';
+import Couple1 from '../Components/Couple1.jpeg';
 
 const MainWrap = styled.div`
   border: 1px solid black;
@@ -12,20 +13,20 @@ const MainWrap = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+  font-family: 'Cute Font', serif;
 `;
 
 const TitleWrap = styled.div`
   width: 30rem;
   height: 5rem;
-  margin: 1rem 0;
   justify-content: center;
   align-items: center;
   display: flex;
   font-size: 30px;
+  font-family: 'Cute Font', serif;
 `;
 
-const Title = styled.input`
-  border: 1px solid black;
+const Title = styled.div`
   font-size: 30px;
   justify-content: center;
   align-items: center;
@@ -55,18 +56,21 @@ const SubTitle = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  font-size: 20px;
+  font-size: 30px;
   margin: 0 5.5rem;
 `;
 
 const PictureWrap = styled.div`
-  border: 1px solid black;
   width: 20rem;
   height: 25rem;
   margin-right: 2rem;
   justify-content: center;
   align-items: center;
   display: flex;
+  background-image: url(${Couple1});
+  background-position: center;
+  background-size: 20rem;
+  background-repeat: no-repeat;
 `;
 
 const UploadImage = styled.img`
@@ -75,11 +79,11 @@ const UploadImage = styled.img`
   object-fit: scale-down;
 `;
 
-const WriteWrap = styled.textarea`
+const WriteWrap = styled.div`
   border: 1px solid black;
   width: 20rem;
   height: 25rem;
-  font-size: 20px;
+  font-size: 50px;
   white-space: pre-wrap;
 `;
 
@@ -114,6 +118,8 @@ const Btn = styled.button`
   border-radius: 10rem;
   border: none;
   margin-right: 1rem;
+  font-family: 'Cute Font', serif;
+  font-size: 20px;
 `;
 
 function Test1() {
@@ -142,26 +148,18 @@ function Test1() {
       <Header />
       <MainWrap>
         <TitleWrap>
-          제목 : <Title />
+          제목 : <Title>100일</Title>
         </TitleWrap>
+        <TitleWrap>날짜 : 2022년 11월 11일</TitleWrap>
         <SubTitleWrap>
           <SubTitle>사진</SubTitle>
           <SubTitle>내용</SubTitle>
         </SubTitleWrap>
         <CenterWrap>
-          <PictureWrap>
-            {fileIma && <UploadImage alt='sample' id='sample' src={fileIma} />}
-          </PictureWrap>
-          <WriteWrap />
+          <PictureWrap />
+          <WriteWrap>우리 100일이에요!</WriteWrap>
         </CenterWrap>
         <BtnWrap>
-          <PictureUpload
-            id='name'
-            name='imgUpload'
-            type='file'
-            accept='image/*'
-            onChange={handleSelect}
-          />
           <Btn>
             <Link
               to={{ pathname: '/' }}

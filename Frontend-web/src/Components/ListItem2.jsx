@@ -33,19 +33,19 @@ const LinkBtn = styled.button`
   border: none;
 `;
 
-function ListItem() {
+function ListItem2() {
   return (
     <div>
       <ItemWrap>
         <Title>
-          2022년 11월 11일
+          2022년 11월 26일
           <br />
-          100일
+          생일
         </Title>
         <LinkBtn>
           {' '}
           <Link
-            to={{ pathname: '/Test1' }}
+            to={{ pathname: '/Test2' }}
             style={{ color: 'inherit', textDecoration: 'inherit' }}
           >
             Go
@@ -56,4 +56,4 @@ function ListItem() {
   );
 }
 
-export default ListItem;
+export default ListItem2;
