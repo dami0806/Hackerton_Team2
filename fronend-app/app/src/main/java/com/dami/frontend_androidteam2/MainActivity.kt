@@ -71,19 +71,25 @@ class MainActivity : AppCompatActivity() {
         dlg.setTitle("ourStory")
         dlg.setMessage("삭제하시겠습니까?")
         dlg.setIcon(R.drawable.img_2)
-
+        var seleitem=listitem[position].time.toString()
         dlg.setNegativeButton("삭제") { dialog, which ->
 
             val postListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (dataModel in dataSnapshot.children) { //datModel: key값
-
-                        if (listitem[position].time.toString() == dataModel.getValue(AddModel::class.java)!!.time.toString()) //클릭한 list[postiion]time과 dateModel의 value time 같을시 삭제
+                        Log.d("출력1",FBRef.boardRef.child(Datetext).child( dataModel.key.toString()).toString())
+                        if (seleitem == dataModel.getValue(AddModel::class.java)!!.time.toString()) //클릭한 list[postiion]time과 dateModel의 value time 같을시 삭제
                         {
+                            Log.d("출력2",seleitem)
+                            Log.d("출력3",dataModel.getValue(AddModel::class.java)!!.time.toString())
+                            Log.d("출력3",dataModel.key.toString())
                             FBRef.boardRef
                                 .child(Datetext)
                                 .child( dataModel.key.toString())
                             .removeValue()
+
+
+
                         }
                     }
                 }
@@ -101,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             FBRef.boardRef
                 .child(Datetext)
                 .addValueEventListener(postListener)
-            
+
 
             Toast.makeText(this, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
 
