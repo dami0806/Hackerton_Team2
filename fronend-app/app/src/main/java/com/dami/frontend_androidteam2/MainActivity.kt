@@ -1,15 +1,18 @@
 package com.dami.frontend_androidteam2
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.dami.frontend_androidteam2.databinding.ActivityMainBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -50,9 +53,62 @@ class MainActivity : AppCompatActivity() {
             listviewTap(position)
         }
 
+
+      listview.setOnItemLongClickListener { parent, view, position, id ->
+          removeList(position)
+          true
+
+      }
+
+
         addimg.setOnClickListener {
             addimgTap()
         }
+    }
+
+    private fun removeList(position: Int) {
+        var dlg = AlertDialog.Builder(this@MainActivity)
+        dlg.setTitle("ourStory")
+        dlg.setMessage("삭제하시겠습니까?")
+        dlg.setIcon(R.drawable.img_2)
+
+        dlg.setNegativeButton("삭제") { dialog, which ->
+
+            val postListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (dataModel in dataSnapshot.children) { //datModel: key값
+
+                        if (listitem[position].time.toString() == dataModel.getValue(AddModel::class.java)!!.time.toString()) //클릭한 list[postiion]time과 dateModel의 value time 같을시 삭제
+                        {
+                            FBRef.boardRef
+                                .child(Datetext)
+                                .child( dataModel.key.toString())
+                            .removeValue()
+                        }
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Getting Post failed, log a message
+                    Log.w(
+                        "ContentListActivity",
+                        "loadPost:onCancelled",
+                        databaseError.toException()
+                    )
+                }
+            }
+
+            FBRef.boardRef
+                .child(Datetext)
+                .addValueEventListener(postListener)
+            
+
+            Toast.makeText(this, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+
+        }
+        dlg.setPositiveButton("취소", null)
+        dlg.show()
+
     }
 
 
@@ -77,11 +133,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun listviewTap(position: Int) {
 
-        Log.d(
-            "화긴",
-            listitem[position].toString()
-        ) // AddModel(title=가, content=나, time=2022년 11월 26일 11:18:48)
-        Log.d("화긴", position.toString())
 
         val intent = Intent(this, showActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -91,6 +142,7 @@ class MainActivity : AppCompatActivity() {
         dateKey = intent.putExtra("dateKey", Datetext).toString()
         startActivity(intent)
         imgkey = intent.getStringExtra("imgKey").toString()
+
 
     }
 
