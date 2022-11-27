@@ -35,7 +35,6 @@ class AddActivity : AppCompatActivity() {
 
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add)
-        val listview:ListView
 
         dateKey = intent.getStringExtra("dateKey").toString()
 
@@ -55,18 +54,12 @@ class AddActivity : AppCompatActivity() {
             val content = binding.contentArea.text.toString()
             val time = getTime()
 
-
-
             FBRef.boardRef
                 .child(dateKey)
                 .push()
                 .setValue(AddModel(title, content, time))
-
-
-            Log.d("이이입려려력", title.toString())
-
             Toast.makeText(this, "오늘의 일기 입력 완료!!", Toast.LENGTH_LONG).show()
-                imageUpload( title.toString())
+                imageUpload( title)
 
           finish()
         }
@@ -74,15 +67,11 @@ class AddActivity : AppCompatActivity() {
 
 
 fun key(date:String){
-
     val postListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
-
             for (dataModel in dataSnapshot.children) {
                 if (date == dataSnapshot.key.toString()){
-
                     itemkey = dataModel.getValue(AddModel::class.java).toString()
-
 
 
                 }
