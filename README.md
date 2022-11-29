@@ -1,3 +1,8 @@
 # Hackerton_Team2
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/85047035/204504511-b334f3aa-65df-40cd-8253-85abbfccd579.gif)
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/85047035/204513956-1d70d7e6-8800-4754-8898-7f528279ab17.gif)
+
+
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/85047035/204516723-8de3d573-3611-4345-b9f4-7ef6cd97c8d8.gif)
+
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/85047035/204515329-179acbf6-be7a-4684-8612-7564485e7bef.gif)
+
+
